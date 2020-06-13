@@ -8,7 +8,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: die
-  m_Speed: 1
+  m_Speed: 0.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 5959464685109714380}
@@ -24,7 +24,7 @@ AnimatorState:
   m_Motion: {fileID: 7400000, guid: 70995be5d395b5342a1862c3c9d85f35, type: 2}
   m_Tag: 
   m_SpeedParameter: 
-  m_MirrorParameter: 
+  m_MirrorParameter: isAlive
   m_CycleOffsetParameter: 
   m_TimeParameter: 
 --- !u!1102 &-2885294822747427892
@@ -95,7 +95,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 1
     m_Controller: {fileID: 0}
-  - m_Name: IsOnTheGround
+  - m_Name: isOnTheGround
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -122,7 +122,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: jump
-  m_Speed: 1
+  m_Speed: 0.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -128899873860743516}
@@ -204,7 +204,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: IsOnTheGround
+    m_ConditionEvent: isOnTheGround
     m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: isAlive
@@ -257,7 +257,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: IsOnTheGround
+    m_ConditionEvent: isOnTheGround
     m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: isAlive
