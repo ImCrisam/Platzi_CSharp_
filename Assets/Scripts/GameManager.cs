@@ -10,11 +10,17 @@ public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
     public static GameManager instanceGameManager;
-    PlayerController controller;
-
-    public GameState currentGameState;
+    public Transform StartPlayer;
+    
+    public GameObject player;
+    CameraFollow cameraFollow;
+    public GameState currentGameState = GameState.menu;
     void Awake()
     {
+
+        player = Instantiate(player);
+        cameraFollow =GameObject.FindWithTag("MainCamera").GetComponent<CameraFollow>();
+        cameraFollow.SetTraget(player.transform);
         if (instanceGameManager == null)
         {
             instanceGameManager = this;
@@ -22,7 +28,8 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        controller = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
+        
+        player.SetActive(false);
     }
 
     // Update is called once per frame
@@ -35,6 +42,10 @@ public class GameManager : MonoBehaviour
                 StartGame();
             }
         }
+         if(currentGameState.Equals(GameState.inGame)){
+             cameraFollow.MoveCamera(true);
+        }
+        
     }
 
 
@@ -42,7 +53,7 @@ public class GameManager : MonoBehaviour
     {
         setGameState(GameState.inGame);
         LevelManager.instance.RemoveLevelAllBlocks();
-        
+        player.SetActive(true);
         Invoke("ReloadLevel", 0.3f);
     }
     public void GameOver()
@@ -70,9 +81,9 @@ public class GameManager : MonoBehaviour
 
     void ReloadLevel()
     {
+        PlayerController controller = player.GetComponent<PlayerController>();
         LevelManager.instance.GenerateInitialBlocks();
         controller.StartGame();
         controller.SetAlive(true);
-        
     }
 }
