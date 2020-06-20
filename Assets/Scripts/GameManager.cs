@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
         {
             instanceGameManager = this;
         }
+        
     }
     void Start()
     {
@@ -62,6 +63,7 @@ public class GameManager : MonoBehaviour
     }
     public void BackToMenu()
     {
+        LevelManager.instance.RemoveLevelAllBlocks();
         setGameState(GameState.menu);
     }
 
@@ -70,10 +72,13 @@ public class GameManager : MonoBehaviour
         switch (state)
         {
             case GameState.menu:
+                MenuManager.instance.ShowMainMenu();
                 break;
             case GameState.inGame:
+                MenuManager.instance.ShowInGame();
                 break;
             case GameState.gameOver:
+                MenuManager.instance.ShowGameOver();
                 break;
         }
         this.currentGameState = state;
@@ -86,4 +91,5 @@ public class GameManager : MonoBehaviour
         controller.StartGame();
         controller.SetAlive(true);
     }
+
 }
