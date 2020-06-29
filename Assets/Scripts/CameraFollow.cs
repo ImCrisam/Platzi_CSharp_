@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    Transform target;
-    public Vector3 offSet = new Vector3(-2.5f, -0.5f, -10f);
+    public Transform target, pointReset;
+    public Vector3 offSet = new Vector3(-2.5f, -3f, -10f);
     public float dampingTime= 0.3f;
     public Vector3 velocity = Vector3.zero;
+    Vector3 destination;
 
 
     private void Awake() {
@@ -26,25 +27,29 @@ public class CameraFollow : MonoBehaviour
    
     }
 
-    public void ResetCameraPosition(){
-        MoveCamera(false);
-    }
-
-    public void SetTraget(Transform transform){
-        this.target = transform;
-    }
-
-    public void MoveCamera(bool smooth){
-        Vector3 destination = new Vector3(target.position.x-offSet.x,
+    public void MoveCamera(bool isTouchingTheGround){
+      
+        if(!isTouchingTheGround){
+             destination = new Vector3(target.position.x-offSet.x,
+                                            this.transform.position.y,
+                                            offSet.z);
+            
+        }else{
+            destination = new Vector3(target.position.x-offSet.x,
                                             target.position.y-offSet.y,
                                             offSet.z);
-        if(smooth){
-            this.transform.position = Vector3.SmoothDamp(this.transform.position,
+          
+        }
+          this.transform.position = Vector3.SmoothDamp(this.transform.position,
                                             destination,
                                             ref velocity,
                                             dampingTime);
-        }else{
-            this.transform.position = destination;
-        }
+    }
+
+    public void ResetCamera(){
+        this.transform.position = new Vector3(pointReset.position.x-offSet.x,
+                                        pointReset.position.y,
+                                        pointReset.position.z);
+        
     }
 }

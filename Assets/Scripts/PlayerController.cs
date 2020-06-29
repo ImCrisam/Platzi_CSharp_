@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     SpriteRenderer sprite;
     public LayerMask groundMask;
     float height, limitHeight, velocityx, axix, sizeBaseFormTheCenter;
-    Vector3 Lastposition;
+    public Transform Lastposition;
     Vector3 temporalV3;
     Animator animator;
     void Awake()
@@ -34,28 +34,20 @@ public class PlayerController : MonoBehaviour
         sizeBaseFormTheCenter = colliderbase.size.x / 2;
         height = colliderPlayer.size.y;
         limitHeight = height / 2.3f;
-        Lastposition = this.transform.position;
         animator.SetBool(STATE_ALIVE, true);
         animator.SetBool(STATE_ON_THE_GROUND, false);
+        
     }
 
     public void StartGame()
     {
-        Invoke("RestarPosition", 0.3f);
-        Invoke("RestarCameraPosition", 0.4f);
-        rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
-
-    }
-    void RestarPosition()
-    {
+        this.transform.position = Lastposition.position;
         rigidBody.velocity = Vector2.zero;
-        this.transform.position = Lastposition;
+        rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
+     
     }
-    void RestarCameraPosition()
-    {
-        GameObject camera = GameObject.FindWithTag("MainCamera");
-        camera.GetComponent<CameraFollow>().ResetCameraPosition();
-    }
+   
+   
     // Update is called once per frame
     void Update()
     {
@@ -64,13 +56,12 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetButtonDown("Jump"))
             {
-
                 Jump();
             }
             velocityx = rigidBody.velocity.x;
             axix = Input.GetAxis("Horizontal");
 
-            if (velocityx < maxRun && velocityx > -maxRun && animator.GetBool(STATE_ON_THE_GROUND))
+            if (velocityx < maxRun && velocityx > -maxRun)
             {
                 rigidBody.AddForce(Vector2.right * runForce * axix, ForceMode2D.Impulse);
 
@@ -113,7 +104,7 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetBool(STATE_ALIVE, alive);
     }
-    bool IsTouchingTheGround()
+    public bool IsTouchingTheGround()
     {
         temporalV3 = this.transform.position;
         temporalV3.x = temporalV3.x-sizeBaseFormTheCenter;
@@ -126,5 +117,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
+  
+  
 
 }

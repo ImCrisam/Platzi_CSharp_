@@ -10,41 +10,37 @@ public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
     public static GameManager instanceGameManager;
-    public Transform StartPlayer;
-    
     public GameObject player;
     CameraFollow cameraFollow;
+    PlayerController playerController;
     public GameState currentGameState = GameState.menu;
     void Awake()
     {
-
-        player = Instantiate(player);
+        //Map obj
+        playerController = player.GetComponent<PlayerController>();
         cameraFollow =GameObject.FindWithTag("MainCamera").GetComponent<CameraFollow>();
-        cameraFollow.SetTraget(player.transform);
+
+        //Singleton
         if (instanceGameManager == null)
         {
             instanceGameManager = this;
         }
+
+        // deactivate player to not be seen by menu
+        player.SetActive(false);
         
     }
     void Start()
     {
-        
-        player.SetActive(false);
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Submit"))
-        {
-            if (!currentGameState.Equals(GameState.inGame))
-            {
-                StartGame();
-            }
-        }
-         if(currentGameState.Equals(GameState.inGame)){
-             cameraFollow.MoveCamera(true);
+        //Follow the player at all times if State InGame
+        if(currentGameState.Equals(GameState.inGame)){
+             cameraFollow.MoveCamera(playerController.IsTouchingTheGround());
         }
         
     }
@@ -52,10 +48,19 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
-        setGameState(GameState.inGame);
+       
         LevelManager.instance.RemoveLevelAllBlocks();
-        player.SetActive(true);
+        
         Invoke("ReloadLevel", 0.3f);
+        
+        Invoke("StartTheGame", 0.4f);
+
+        // setGameState(GameState.inGame);
+        // cameraFollow.ResetCamera();
+
+    }
+    void StartTheGame(){
+        setGameState(GameState.inGame);
     }
     public void GameOver()
     {
@@ -64,6 +69,7 @@ public class GameManager : MonoBehaviour
     public void BackToMenu()
     {
         LevelManager.instance.RemoveLevelAllBlocks();
+       
         setGameState(GameState.menu);
     }
 
@@ -86,10 +92,16 @@ public class GameManager : MonoBehaviour
 
     void ReloadLevel()
     {
-        PlayerController controller = player.GetComponent<PlayerController>();
         LevelManager.instance.GenerateInitialBlocks();
-        controller.StartGame();
-        controller.SetAlive(true);
+        player.SetActive(true);
+        playerController.SetAlive(true);
+        playerController.StartGame();
+        cameraFollow.ResetCamera();
+    }
+
+    void ActivatePlayer(){
+        player.SetActive(true);
+
     }
 
 }
