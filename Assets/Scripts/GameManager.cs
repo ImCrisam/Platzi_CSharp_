@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     public static GameManager instanceGameManager;
     public GameObject player;
+    public int collectedObject;
     CameraFollow cameraFollow;
     PlayerController playerController;
     public GameState currentGameState = GameState.menu;
@@ -103,5 +104,9 @@ public class GameManager : MonoBehaviour
         player.SetActive(true);
 
     }
+    public void CollectObject(Collectable collectable){
+        collectedObject += collectable.vale;;
+    }
+    
 
 }
