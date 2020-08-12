@@ -5,7 +5,8 @@ using UnityEngine;
 public enum TypeCollec
 {
     coin,
-    potion
+    potionHelath,
+    potionMana,
 }
 public class Collectable : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class Collectable : MonoBehaviour
     private CircleCollider2D itemCollider;
     private bool hasBeen = false;
     public int vale = 1;
+    GameObject player;
     // Start is called before the first frame update
     private void Awake()
     {
@@ -22,7 +24,7 @@ public class Collectable : MonoBehaviour
     }
     void Start()
     {
-
+        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
@@ -33,7 +35,7 @@ public class Collectable : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag.Equals("Player"))
+        if (other.tag.Equals("Player") && other is CapsuleCollider2D)
         {
             Collect();
         }
@@ -60,11 +62,13 @@ public class Collectable : MonoBehaviour
             case TypeCollec.coin:
                 GameManager.instanceGameManager.CollectObject(this);
                 break;
-            case TypeCollec.potion:
-
+            case TypeCollec.potionHelath:
+                
+                player.GetComponent<PlayerController>().CollectHealth(this.vale);
                 break;
-            default:
-
+            case TypeCollec.potionMana:
+                
+                player.GetComponent<PlayerController>().CollectMana(this.vale);
                 break;
         }
 

@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     const string STATE_VELOCITY_Y = "velocityY";
 
     public const int INITIAL_HEALTH =100, INITIAL_MANA=15,
-                     MAX_HEALTH = 200, MAX_MANA = 30,
+                     MAX_HEALTH = 200, MAX_MANA = 60,
                      MIN_HEALTH =10, MIN_MANA=0;
 
     private int healthPoints, manaPoints;

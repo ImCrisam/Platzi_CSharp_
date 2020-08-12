@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6070282803089667854}
   - component: {fileID: 8117384171815344956}
-  - component: {fileID: 4159352325463672537}
+  - component: {fileID: -2675650570923503954}
+  - component: {fileID: 2769257187968140786}
   m_Layer: 0
-  m_Name: potion1
+  m_Name: potionMana
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -2549273120127555650, guid: 739e5ea49d13e2b47b853b5b51c23772,
     type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.39348292, b: 0.18900001, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -83,8 +84,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &4159352325463672537
-PolygonCollider2D:
+--- !u!114 &-2675650570923503954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4616352472836664031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 591aa21092581384ea22d2916a9b340c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
+  vale: 100
+--- !u!58 &2769257187968140786
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -93,22 +108,9 @@ PolygonCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.76, y: 1.2202243}
-    newSize: {x: 0.76, y: 1.2202243}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.33398113, y: -0.56198823}
-      - {x: 0.11114464, y: 0.15866204}
-      - {x: -0.14868908, y: 0.16357933}
-      - {x: -0.29878175, y: -0.5633134}
+  m_Offset: {x: -0.007824224, y: -0.19364984}
+  serializedVersion: 2
+  m_Radius: 0.37734106
