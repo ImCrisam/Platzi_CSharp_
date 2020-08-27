@@ -105,6 +105,10 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
+        float travelled = GetTravelDistrance();
+        float prevTravelled = PlayerPrefs.GetFloat("maxScorre", 0);
+        PlayerPrefs.SetFloat("maxScorre",travelled>prevTravelled ? travelled : prevTravelled);
+
         this.animator.SetBool(STATE_ALIVE, false);
         GameManager.instanceGameManager.GameOver();
     }
