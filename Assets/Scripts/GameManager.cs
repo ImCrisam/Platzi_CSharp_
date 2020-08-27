@@ -28,7 +28,8 @@ public class GameManager : MonoBehaviour
         }
 
         // deactivate player to not be seen by menu
-        player.SetActive(false);
+        //player.SetActive(true);
+        player.GetComponent<SpriteRenderer>().enabled = false;
         
     }
     void Start()
@@ -94,14 +95,15 @@ public class GameManager : MonoBehaviour
     void ReloadLevel()
     {
         LevelManager.instance.GenerateInitialBlocks();
-        player.SetActive(true);
+        player.GetComponent<SpriteRenderer>().enabled = true;
         playerController.SetAlive(true);
         playerController.StartGame();
         cameraFollow.ResetCamera();
     }
 
     void ActivatePlayer(){
-        player.SetActive(true);
+        //player.SetActive(true);
+        player.GetComponent<SpriteRenderer>().enabled = true;
 
     }
     public void CollectObject(Collectable collectable){

@@ -145,6 +145,10 @@ public class PlayerController : MonoBehaviour
         return manaPoints;
     }
 
+    public float GetTravelDistrance(){
+        return this.transform.position.x - Lastposition.position.x;
+    }
+
     
 
 

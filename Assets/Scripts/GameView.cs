@@ -7,13 +7,13 @@ public class GameView : MonoBehaviour
 {
     public Text coinsText, scoreText;
     public int coins=0;
-    public float score=0, maxScore=0;
+    public float score, maxScore=0, multiCoins=5.2f;
     private string stringScore;
     // Start is called before the first frame update
-    
+    private PlayerController controller;
     void Start()
     {
-        
+        controller = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -22,7 +22,10 @@ public class GameView : MonoBehaviour
         if(GameManager.instanceGameManager.currentGameState.Equals(GameState.inGame)){
             coins = GameManager.instanceGameManager.collectedObject;
             coinsText.text = coins.ToString();
-            stringScore = score.ToString("f1")+"/"+maxScore.ToString("f1");
+            score = controller.GetTravelDistrance() +coins*multiCoins;
+            stringScore = score.ToString("f1");
+            
+            //stringScore = score.ToString("f1")+"/"+maxScore.ToString("f1");
             scoreText.text = stringScore;
         }
     }
