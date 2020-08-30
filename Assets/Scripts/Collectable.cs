@@ -14,7 +14,7 @@ public class Collectable : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private CircleCollider2D itemCollider;
     private bool hasBeen = false;
-    public int vale = 1;
+    public int vale = 25;
     GameObject player;
     // Start is called before the first frame update
     private void Awake()

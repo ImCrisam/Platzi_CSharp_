@@ -1316,15 +1316,25 @@ PrefabInstance:
       propertyPath: Lastposition
       value: 
       objectReference: {fileID: 1133390316}
+    - target: {fileID: -439120843825549169, guid: 83b3eafd9210e004b8e37a27fc617053,
+        type: 3}
+      propertyPath: costMana
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 335861705324856770, guid: 83b3eafd9210e004b8e37a27fc617053,
         type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 335861705324856770, guid: 83b3eafd9210e004b8e37a27fc617053,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 335861705324856772, guid: 83b3eafd9210e004b8e37a27fc617053,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 335861705324856773, guid: 83b3eafd9210e004b8e37a27fc617053,
         type: 3}
@@ -2199,6 +2209,7 @@ MonoBehaviour:
   coins: 0
   score: 0
   maxScore: 0
+  multiCoins: 5.2
 --- !u!1 &1617604460
 GameObject:
   m_ObjectHideFlags: 0

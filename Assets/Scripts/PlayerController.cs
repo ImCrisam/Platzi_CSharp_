@@ -8,17 +8,18 @@ public class PlayerController : MonoBehaviour
     const string STATE_ON_THE_GROUND = "isOnTheGround";
     const string STATE_VELOCITY_Y = "velocityY";
 
-    public const int INITIAL_HEALTH =100, INITIAL_MANA=15,
-                     MAX_HEALTH = 200, MAX_MANA = 60,
-                     MIN_HEALTH =10, MIN_MANA=0;
+    public const int INITIAL_HEALTH = 100, INITIAL_MANA = 50,
+                     MAX_HEALTH = 200, MAX_MANA = 100,
+                     MIN_HEALTH = 10, MIN_MANA = 0;
 
     private int healthPoints, manaPoints;
 
 
 
-    public float jumpForce = 7f;
-    public float runForce = 1f;
-    public float maxRun = 5f;
+    public float jumpForce = 7f, runForce = 1f, runForcePower = 2f;
+
+    public float maxRun = 5f, maxRunPower = 8f;
+    public int costMana = 1;
     Rigidbody2D rigidBody;
     CapsuleCollider2D colliderPlayer;
     BoxCollider2D colliderbase;
@@ -43,7 +44,7 @@ public class PlayerController : MonoBehaviour
         limitHeight = height / 2.3f;
         animator.SetBool(STATE_ALIVE, true);
         animator.SetBool(STATE_ON_THE_GROUND, false);
-        
+
     }
 
     public void StartGame()
@@ -53,10 +54,10 @@ public class PlayerController : MonoBehaviour
         rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
         healthPoints = INITIAL_HEALTH;
         manaPoints = INITIAL_MANA;
-     
+
     }
-   
-   
+
+
     // Update is called once per frame
     void Update()
     {
@@ -67,27 +68,34 @@ public class PlayerController : MonoBehaviour
             {
                 Jump();
             }
-            velocityx = rigidBody.velocity.x;
+
             axix = Input.GetAxis("Horizontal");
-
-            if (velocityx < maxRun && velocityx > -maxRun)
+            if (axix != 0 && Input.GetButton("Run"))
             {
-                rigidBody.AddForce(Vector2.right * runForce * axix, ForceMode2D.Impulse);
+                if (manaPoints >= costMana)
+                {
+                    manaPoints -=costMana;
+                    Run(axix, runForcePower, maxRunPower);
 
+                }
+                else
+                {
+                    Run(axix, runForce, maxRun);
+                }
             }
-            else
+            else if (axix != 0)
             {
-                rigidBody.velocity = new Vector2(Vector2.ClampMagnitude(rigidBody.velocity, maxRun).x, rigidBody.velocity.y);
-
+                Run(axix, runForce, maxRun);
             }
+
 
             animator.SetFloat(STATE_VELOCITY_Y, rigidBody.velocity.y);
             animator.SetBool(STATE_ON_THE_GROUND, IsTouchingTheGround());
             sprite.flipX = velocityx < 0;
             temporalV3 = this.transform.position;
-            temporalV3.x = temporalV3.x-sizeBaseFormTheCenter;
-            temporalV3.y = temporalV3.y-limitHeight;
-            Debug.DrawRay(temporalV3, Vector2.right * sizeBaseFormTheCenter*2, Color.magenta);
+            temporalV3.x = temporalV3.x - sizeBaseFormTheCenter;
+            temporalV3.y = temporalV3.y - limitHeight;
+            Debug.DrawRay(temporalV3, Vector2.right * sizeBaseFormTheCenter * 2, Color.magenta);
         }
         else if (GameManager.instanceGameManager.currentGameState.Equals(GameState.menu))
         {
@@ -103,11 +111,26 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void Run(float axix, float force, float max)
+    {
+        velocityx = rigidBody.velocity.x;
+        if (velocityx < max && velocityx > -max)
+        {
+            rigidBody.AddForce(Vector2.right * force * axix, ForceMode2D.Impulse);
+
+        }
+        else
+        {
+            rigidBody.velocity = new Vector2(Vector2.ClampMagnitude(rigidBody.velocity, max).x, rigidBody.velocity.y);
+
+        }
+    }
+
     public void Die()
     {
         float travelled = GetTravelDistrance();
         float prevTravelled = PlayerPrefs.GetFloat("maxScorre", 0);
-        PlayerPrefs.SetFloat("maxScorre",travelled>prevTravelled ? travelled : prevTravelled);
+        PlayerPrefs.SetFloat("maxScorre", travelled > prevTravelled ? travelled : prevTravelled);
 
         this.animator.SetBool(STATE_ALIVE, false);
         GameManager.instanceGameManager.GameOver();
@@ -120,43 +143,50 @@ public class PlayerController : MonoBehaviour
     public bool IsTouchingTheGround()
     {
         temporalV3 = this.transform.position;
-        temporalV3.x = temporalV3.x-sizeBaseFormTheCenter;
-        temporalV3.y = temporalV3.y-limitHeight;
+        temporalV3.x = temporalV3.x - sizeBaseFormTheCenter;
+        temporalV3.y = temporalV3.y - limitHeight;
         return Physics2D.Raycast(temporalV3,
                                     Vector2.right,
-                                    sizeBaseFormTheCenter*2,
+                                    sizeBaseFormTheCenter * 2,
                                     groundMask);
-                
+
 
     }
-    public void CollectHealth(int points){
+    public void CollectHealth(int points)
+    {
         this.healthPoints += points;
-        if(this.healthPoints>MAX_HEALTH){
+        if (this.healthPoints > MAX_HEALTH)
+        {
             this.healthPoints = MAX_HEALTH;
         }
     }
-    public void CollectMana(int points){
+    public void CollectMana(int points)
+    {
         this.manaPoints += points;
-        if(this.manaPoints>MAX_MANA){
+        if (this.manaPoints > MAX_MANA)
+        {
             this.manaPoints = MAX_MANA;
         }
     }
 
-    public int GetHealth(){
+    public int GetHealth()
+    {
         return healthPoints;
-    } 
-    public int GetMana(){
+    }
+    public int GetMana()
+    {
         return manaPoints;
     }
 
-    public float GetTravelDistrance(){
+    public float GetTravelDistrance()
+    {
         return this.transform.position.x - Lastposition.position.x;
     }
 
-    
 
 
-  
-  
+
+
+
 
 }
