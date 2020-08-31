@@ -30,6 +30,7 @@ public class MenuManager : MonoBehaviour
         canvasPlay.enabled = false;
     }
      public void ShowGameOver( ){
+        canvasGameOver.GetComponent<GameOver>().cargar();
         canvasMenu.enabled =false;
         canvasGameOver.enabled = true;
         canvasPlay.enabled = false;

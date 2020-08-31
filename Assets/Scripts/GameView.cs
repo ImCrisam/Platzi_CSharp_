@@ -21,11 +21,12 @@ public class GameView : MonoBehaviour
     {
         if (GameManager.instanceGameManager.currentGameState.Equals(GameState.inGame))
         {
-            coins = GameManager.instanceGameManager.collectedObject;
+            coins = GameManager.instanceGameManager.coins;
             coinsText.text = coins.ToString();
             score = controller.GetTravelDistrance() + coins * multiCoins;
+            GameManager.instanceGameManager.score = score;
             maxScore = PlayerPrefs.GetFloat("maxScorre", 0);
-            stringScore = maxScore==0 
+            stringScore = maxScore==0 || maxScore<score
                         ? score.ToString("f1") : score.ToString("f1")+"/"+maxScore.ToString("f1");
             
             scoreText.text = stringScore;

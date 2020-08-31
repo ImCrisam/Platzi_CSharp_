@@ -41,6 +41,7 @@
      <Compile Include="Assets\Scripts\ExitLevel.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\GameView.cs" />
+     <Compile Include="Assets\Scripts\GameOver.cs" />
      <Compile Include="Assets\Scripts\KillZone.cs" />
      <Compile Include="Assets\Scripts\LevelBlock.cs" />
      <Compile Include="Assets\Scripts\LevelManager.cs" />

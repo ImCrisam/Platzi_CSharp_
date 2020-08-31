@@ -11,7 +11,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     public static GameManager instanceGameManager;
     public GameObject player;
-    public int collectedObject;
+    public int coins;
+    public float score;
     CameraFollow cameraFollow;
     PlayerController playerController;
     public GameState currentGameState = GameState.menu;
@@ -94,6 +95,8 @@ public class GameManager : MonoBehaviour
 
     void ReloadLevel()
     {
+        coins =0;
+        score =0f;
         LevelManager.instance.GenerateInitialBlocks();
         player.GetComponent<SpriteRenderer>().enabled = true;
         playerController.SetAlive(true);
@@ -107,7 +110,7 @@ public class GameManager : MonoBehaviour
 
     }
     public void CollectObject(Collectable collectable){
-        collectedObject += collectable.vale;;
+        coins += collectable.vale;;
     }
     
 

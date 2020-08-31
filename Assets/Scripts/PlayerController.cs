@@ -128,7 +128,7 @@ public class PlayerController : MonoBehaviour
 
     public void Die()
     {
-        float travelled = GetTravelDistrance();
+        float travelled = GameManager.instanceGameManager.score;
         float prevTravelled = PlayerPrefs.GetFloat("maxScorre", 0);
         PlayerPrefs.SetFloat("maxScorre", travelled > prevTravelled ? travelled : prevTravelled);
 
