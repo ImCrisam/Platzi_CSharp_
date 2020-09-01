@@ -108,15 +108,18 @@ public class PlayerController : MonoBehaviour
 
     public void Jump()
     {
-        rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+        if (GameManager.instanceGameManager.currentGameState.Equals(GameState.inGame)){
+        rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);}
 
     }
     public void JumpHorizontal(bool left)
     {
+        if (GameManager.instanceGameManager.currentGameState.Equals(GameState.inGame)){
         temporalV2 = Vector2.one;
         temporalV2.x = left ? -temporalV2.x : temporalV2.x;
         rigidBody.AddRelativeForce(temporalV2 * (jumpForce / 2), ForceMode2D.Impulse);
         //rigidBody.AddForce(temporalV2* (jumpForce/2), ForceMode2D.Impulse);
+        }
     }
 
     void Run(float axix, float force, float max)
