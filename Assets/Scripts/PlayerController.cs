@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     float height, limitHeight, velocityx, axix, sizeBaseFormTheCenter;
     public Transform Lastposition;
     Vector3 temporalV3;
-    Vector2 temporalV2;
+    Vector2 temporalV2, sizePlayerAlive;
     Animator animator;
     void Awake()
     {
@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
     }
     void Start()
     {
+        sizePlayerAlive = colliderPlayer.size;
         sizeBaseFormTheCenter = colliderbase.size.x / 2;
         height = colliderPlayer.size.y;
         limitHeight = height / 2.3f;
@@ -56,7 +57,7 @@ public class PlayerController : MonoBehaviour
         rigidBody.constraints = RigidbodyConstraints2D.FreezeRotation;
         healthPoints = INITIAL_HEALTH;
         manaPoints = INITIAL_MANA;
-
+        ConfiCollider(true);
     }
 
 
@@ -110,10 +111,11 @@ public class PlayerController : MonoBehaviour
         rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
 
     }
-    public void JumpHorizontal(bool left){
-        temporalV2 =Vector2.one;
-        temporalV2.x = left ? -temporalV2.x:temporalV2.x;
-        rigidBody.AddRelativeForce(temporalV2* (jumpForce/2), ForceMode2D.Impulse);
+    public void JumpHorizontal(bool left)
+    {
+        temporalV2 = Vector2.one;
+        temporalV2.x = left ? -temporalV2.x : temporalV2.x;
+        rigidBody.AddRelativeForce(temporalV2 * (jumpForce / 2), ForceMode2D.Impulse);
         //rigidBody.AddForce(temporalV2* (jumpForce/2), ForceMode2D.Impulse);
     }
 
@@ -137,15 +139,23 @@ public class PlayerController : MonoBehaviour
         float travelled = GameManager.instanceGameManager.score;
         float prevTravelled = PlayerPrefs.GetFloat("maxScorre", 0);
         PlayerPrefs.SetFloat("maxScorre", travelled > prevTravelled ? travelled : prevTravelled);
-
+        this.ConfiCollider(false);
         this.animator.SetBool(STATE_ALIVE, false);
         GameManager.instanceGameManager.GameOver();
+        
     }
 
     public void SetAlive(bool alive)
     {
         animator.SetBool(STATE_ALIVE, alive);
     }
+
+    public void ConfiCollider(bool alive){
+        colliderbase.isTrigger = !alive;
+        colliderPlayer.direction = alive ? CapsuleDirection2D.Vertical:CapsuleDirection2D.Horizontal ;
+        colliderPlayer.size = !alive ? new Vector2(sizePlayerAlive.y,sizePlayerAlive.x):sizePlayerAlive;
+    }
+   
     public bool IsTouchingTheGround()
     {
         temporalV3 = this.transform.position;
@@ -198,7 +208,8 @@ public class PlayerController : MonoBehaviour
     {
         return this.transform.position.x - Lastposition.position.x;
     }
-    public float GetVelocityX(){
+    public float GetVelocityX()
+    {
         return velocityx;
     }
 

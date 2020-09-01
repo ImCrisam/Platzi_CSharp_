@@ -171,6 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aec5b56d8e741e4448250e8bd6e1930a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damager: 500
   distanceRay: 0.4
   velocity: 2
   groundMask:
