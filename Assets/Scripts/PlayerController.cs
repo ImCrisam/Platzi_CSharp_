@@ -19,6 +19,7 @@ public class PlayerController : MonoBehaviour
     public float jumpForce = 7f, runForce = 1f, runForcePower = 2f;
 
     public float maxRun = 5f, maxRunPower = 8f;
+    float floatTemporal;
     public int costMana = 1;
     Rigidbody2D rigidBody;
     CapsuleCollider2D colliderPlayer;
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
     float height, limitHeight, velocityx, axix, sizeBaseFormTheCenter;
     public Transform Lastposition;
     Vector3 temporalV3;
+    Vector2 temporalV2;
     Animator animator;
     void Awake()
     {
@@ -64,7 +66,7 @@ public class PlayerController : MonoBehaviour
         if (GameManager.instanceGameManager.currentGameState.Equals(GameState.inGame))
         {
 
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Jump") && IsTouchingTheGround())
             {
                 Jump();
             }
@@ -74,7 +76,7 @@ public class PlayerController : MonoBehaviour
             {
                 if (manaPoints >= costMana)
                 {
-                    manaPoints -=costMana;
+                    manaPoints -= costMana;
                     Run(axix, runForcePower, maxRunPower);
 
                 }
@@ -103,12 +105,16 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Jump()
+    public void Jump()
     {
-        if (IsTouchingTheGround())
-        {
-            rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-        }
+        rigidBody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+
+    }
+    public void JumpHorizontal(bool left){
+        temporalV2 =Vector2.one;
+        temporalV2.x = left ? -temporalV2.x:temporalV2.x;
+        rigidBody.AddRelativeForce(temporalV2* (jumpForce/2), ForceMode2D.Impulse);
+        //rigidBody.AddForce(temporalV2* (jumpForce/2), ForceMode2D.Impulse);
     }
 
     void Run(float axix, float force, float max)
@@ -149,8 +155,6 @@ public class PlayerController : MonoBehaviour
                                     Vector2.right,
                                     sizeBaseFormTheCenter * 2,
                                     groundMask);
-
-
     }
     public void CollectHealth(int points)
     {
@@ -158,6 +162,18 @@ public class PlayerController : MonoBehaviour
         if (this.healthPoints > MAX_HEALTH)
         {
             this.healthPoints = MAX_HEALTH;
+        }
+    }
+
+    public void subtractHealth(int point)
+    {
+        if (GameManager.instanceGameManager.currentGameState.Equals(GameState.inGame))
+        {
+            this.healthPoints -= point;
+            if (this.healthPoints <= 0)
+            {
+                Die();
+            }
         }
     }
     public void CollectMana(int points)
@@ -182,7 +198,9 @@ public class PlayerController : MonoBehaviour
     {
         return this.transform.position.x - Lastposition.position.x;
     }
-
+    public float GetVelocityX(){
+        return velocityx;
+    }
 
 
 

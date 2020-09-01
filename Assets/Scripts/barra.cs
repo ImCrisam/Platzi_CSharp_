@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public enum barType{
 health, mana
 }
-public class barra : MonoBehaviour
+public class Barra : MonoBehaviour
 {
     public barType type;
     private Slider slider;

@@ -12,6 +12,9 @@ GameObject:
   - component: {fileID: 2092411412925480224}
   - component: {fileID: 4487654102274104283}
   - component: {fileID: 5306467809729936649}
+  - component: {fileID: 8658474075327603874}
+  - component: {fileID: 6170777211125911500}
+  - component: {fileID: 9024449654270679514}
   m_Layer: 0
   m_Name: enemy
   m_TagString: Untagged
@@ -116,6 +119,60 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.00000022456925, y: -0.08726614}
-  m_Size: {x: 2.4908125, y: 1.1219083}
+  m_Offset: {x: 0.0137563255, y: -0.045993824}
+  m_Size: {x: 2.60088, y: 0.9430713}
   m_Direction: 1
+--- !u!50 &8658474075327603874
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4896274011838192932}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 1
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 6
+--- !u!70 &6170777211125911500
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4896274011838192932}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.000000003690067, y: -0.030954529}
+  m_Size: {x: 2.7900016, y: 1.109575}
+  m_Direction: 1
+--- !u!114 &9024449654270679514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4896274011838192932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aec5b56d8e741e4448250e8bd6e1930a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distanceRay: 0.4
+  velocity: 2
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 256

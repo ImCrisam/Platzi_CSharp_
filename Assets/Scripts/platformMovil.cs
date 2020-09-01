@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class platformMovil : MonoBehaviour
+public class PlatformMovil : MonoBehaviour
 {
     // Start is called before the first frame update
     private void OnTriggerEnter2D(Collider2D other) {
