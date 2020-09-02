@@ -69,6 +69,7 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetButtonDown("Jump") && IsTouchingTheGround())
             {
+                this.GetComponent<AudioSource>().Play();
                 Jump();
             }
 

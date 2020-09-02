@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     float rayCastDown;
     Vector2 position, pointLeft, pointRight;
     float height, width, scaleHeight, ScaleWidth;
-    Rigidbody2D rigidbody;
+    new Rigidbody2D rigidbody;
     SpriteRenderer sprite;
     PlayerController player;
 
@@ -45,6 +45,7 @@ public class Enemy : MonoBehaviour
         }
         else if (other.tag.Equals("Player") )
         {
+            this.GetComponent<AudioSource>().Play();
             if(other is BoxCollider2D){
             player.subtractHealth(damager);
             player.Jump();

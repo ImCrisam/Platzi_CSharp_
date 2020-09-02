@@ -13,7 +13,6 @@ public class Collectable : MonoBehaviour
     public TypeCollec type = TypeCollec.coin;
     private SpriteRenderer spriteRenderer;
     private CircleCollider2D itemCollider;
-    private bool hasBeen = false;
     public int vale = 25;
     GameObject player;
     // Start is called before the first frame update
@@ -45,14 +44,12 @@ public class Collectable : MonoBehaviour
     {
         spriteRenderer.enabled = true;
         itemCollider.enabled = true;
-        hasBeen = false;
     }
 
     void Hide()
     {
         spriteRenderer.enabled = false;
         itemCollider.enabled = false;
-        hasBeen = true;
     }
     void Collect()
     {
@@ -60,6 +57,7 @@ public class Collectable : MonoBehaviour
         switch (this.type)
         {
             case TypeCollec.coin:
+                this.GetComponent<AudioSource>().Play();
                 GameManager.instanceGameManager.CollectObject(this);
                 break;
             case TypeCollec.potionHelath:
