@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
 
 
     public float jumpForce = 7f, runForce = 1f, runForcePower = 2f;
-
+    public Color colorBase, colorDamager;
     public float maxRun = 5f, maxRunPower = 8f;
     float floatTemporal;
     public int costMana = 1;
@@ -184,6 +184,8 @@ public class PlayerController : MonoBehaviour
         if (GameManager.instanceGameManager.currentGameState.Equals(GameState.inGame))
         {
             this.healthPoints -= point;
+            SetColorDamager();
+            Invoke("SetColorBase", 0.7f);
             if (this.healthPoints <= 0)
             {
                 Die();
@@ -215,6 +217,15 @@ public class PlayerController : MonoBehaviour
     public float GetVelocityX()
     {
         return velocityx;
+    }
+
+    public void SetColorDamager(){
+         sprite.color =colorDamager;
+
+    }
+    public void SetColorBase(){
+         sprite.color =colorBase;
+
     }
 
 

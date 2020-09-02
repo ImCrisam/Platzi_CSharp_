@@ -1513,6 +1513,46 @@ PrefabInstance:
       propertyPath: costMana
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -439120843825549169, guid: 83b3eafd9210e004b8e37a27fc617053,
+        type: 3}
+      propertyPath: colorBase.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -439120843825549169, guid: 83b3eafd9210e004b8e37a27fc617053,
+        type: 3}
+      propertyPath: colorBase.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -439120843825549169, guid: 83b3eafd9210e004b8e37a27fc617053,
+        type: 3}
+      propertyPath: colorBase.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -439120843825549169, guid: 83b3eafd9210e004b8e37a27fc617053,
+        type: 3}
+      propertyPath: colorDamager.r
+      value: 0.8113208
+      objectReference: {fileID: 0}
+    - target: {fileID: -439120843825549169, guid: 83b3eafd9210e004b8e37a27fc617053,
+        type: 3}
+      propertyPath: colorDamager.g
+      value: 0.5549128
+      objectReference: {fileID: 0}
+    - target: {fileID: -439120843825549169, guid: 83b3eafd9210e004b8e37a27fc617053,
+        type: 3}
+      propertyPath: colorDamager.b
+      value: 0.5549128
+      objectReference: {fileID: 0}
+    - target: {fileID: -439120843825549169, guid: 83b3eafd9210e004b8e37a27fc617053,
+        type: 3}
+      propertyPath: colorBase.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -439120843825549169, guid: 83b3eafd9210e004b8e37a27fc617053,
+        type: 3}
+      propertyPath: colorDamager.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 335861705324856770, guid: 83b3eafd9210e004b8e37a27fc617053,
         type: 3}
       propertyPath: m_Name
