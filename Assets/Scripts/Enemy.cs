@@ -24,14 +24,15 @@ public class Enemy : MonoBehaviour
         width = (this.GetComponent<CapsuleCollider2D>().size.x * this.transform.localScale.x) / 2;
         rayCastDown = height + distanceRay;
         rigidbody.velocity = new Vector2(-velocity, 0);
-        
+
     }
-    
+
 
     // Update is called once per frame
 
-   
-    private void FixedUpdate() {
+
+    private void FixedUpdate()
+    {
 
         if (IsOnTheEdge())
         {
@@ -40,19 +41,24 @@ public class Enemy : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.layer.Equals(LayerMask.NameToLayer("Ground"))){
+        if (other.gameObject.layer.Equals(LayerMask.NameToLayer("Ground")))
+        {
             fixX();
         }
-        else if (other.tag.Equals("Player") )
+        else if (other.tag.Equals("Player"))
         {
-            this.GetComponent<AudioSource>().Play();
-            if(other is BoxCollider2D){
-            player.subtractHealth(damager);
-            player.Jump();
-            }else{
-            player.subtractHealth(damager);
 
-            player.JumpHorizontal(player.GetVelocityX()>0 ? true : false);
+            if (player.subtractHealth(damager))
+            {
+                this.GetComponent<AudioSource>().Play();
+            }
+            if (other is BoxCollider2D)
+            {
+                player.Jump();
+            }
+            else
+            {
+                player.JumpHorizontal(player.GetVelocityX() > 0 ? true : false);
             }
         }
     }

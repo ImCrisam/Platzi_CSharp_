@@ -116,6 +116,7 @@ public class PlayerController : MonoBehaviour
     public void JumpHorizontal(bool left)
     {
         if (GameManager.instanceGameManager.currentGameState.Equals(GameState.inGame)){
+        rigidBody.velocity = Vector2.zero;
         temporalV2 = Vector2.one;
         temporalV2.x = left ? -temporalV2.x : temporalV2.x;
         rigidBody.AddRelativeForce(temporalV2 * (jumpForce / 2), ForceMode2D.Impulse);
@@ -179,7 +180,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void subtractHealth(int point)
+    public bool subtractHealth(int point)
     {
         if (GameManager.instanceGameManager.currentGameState.Equals(GameState.inGame))
         {
@@ -190,6 +191,9 @@ public class PlayerController : MonoBehaviour
             {
                 Die();
             }
+            return true;
+        }else{
+            return false;
         }
     }
     public void CollectMana(int points)
