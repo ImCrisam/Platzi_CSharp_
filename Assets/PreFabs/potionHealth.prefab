@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingOrder: 0
   m_Sprite: {fileID: -2549273120127555650, guid: 739e5ea49d13e2b47b853b5b51c23772,
     type: 3}
-  m_Color: {r: 0, g: 0.35959575, b: 0.807, a: 1}
+  m_Color: {r: 0.98039216, g: 0.34117648, b: 0.02745098, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 591aa21092581384ea22d2916a9b340c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
+  type: 1
   vale: 50
 --- !u!58 &4977988920620286341
 CircleCollider2D:
