@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 7
-  runForce: 1
+  runForce: 0.7
   runForcePower: 2
   colorBase: {r: 1, g: 1, b: 1, a: 1}
   colorDamager: {r: 0.8113208, g: 0.5549128, b: 0.5549128, a: 1}
