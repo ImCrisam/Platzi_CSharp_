@@ -3420,11 +3420,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bd4fc33ce0224f45b682babfd4c4199, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  block: {fileID: 0}
   currentLevelBlock: []
-  LevelBlocks:
-  - {fileID: 5443722506196304628, guid: 306901c41ee073746960988cd9b226b0, type: 3}
   openLevel: {fileID: 313885706}
+  blockInit: {fileID: 5443722506196304628, guid: ecc26a54eace6914fa3b6d4cb1678658,
+    type: 3}
+  numberBlocksEasy: 1
+  LevelBlocksEasy:
+  - {fileID: 5443722506196304628, guid: 071524a59ea5a9e40ac5878d14bc5184, type: 3}
+  - {fileID: 5443722506196304628, guid: a8aef85bfbc7cb4479a07f79b1b9b716, type: 3}
+  numberBlocksMedium: 2
+  LevelBlocksMedium:
+  - {fileID: 5443722506196304628, guid: bcafc8b6d060a594f8c7d0bcd34c0062, type: 3}
+  - {fileID: 5443722506196304628, guid: bf98853da67e74643aada5fc108c202b, type: 3}
+  - {fileID: 5443722506196304628, guid: 40a6e002e9737be48aba839494e243ab, type: 3}
+  - {fileID: 5443722506196304628, guid: b2a9590982de598439e3b10a51b939aa, type: 3}
+  numberBlocksHard: 1
+  LevelBlocksHard:
+  - {fileID: 5443722506196304628, guid: 306901c41ee073746960988cd9b226b0, type: 3}
+  - {fileID: 5443722506196304628, guid: 1754c4d72b5585c4998984ddd0663e0b, type: 3}
 --- !u!4 &2143266155
 Transform:
   m_ObjectHideFlags: 0

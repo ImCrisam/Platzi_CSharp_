@@ -10,16 +10,38 @@ public class LevelManager : MonoBehaviour
 {
     // Start is called before the first frame update
     public static LevelManager instance;
-
     LevelBlock block;
-    public LevelBlock blockInit;
-    public List<LevelBlock> currentLevelBlock = new List<LevelBlock>();
-    public List<LevelBlock> LevelBlocksEasy = new List<LevelBlock>();
-    public List<LevelBlock> LevelBlocksMedium = new List<LevelBlock>();
-    public List<LevelBlock> LevelBlocksHard = new List<LevelBlock>();
-    public Transform openLevel;
-    private int cycle, countCycle;
 
+    [Header("Niveles en el juego")]
+    [SerializeField]private List<LevelBlock> currentLevelBlock = new List<LevelBlock>();
+    [Space]
+
+    [Header("NIVELES")]
+    public Transform openLevel;
+
+    [Header("Tutorial")]
+    public LevelBlock blockInit;
+
+    [Header("Easy")]
+    [Space(5)]
+    public int numberBlocksEasy;
+    public List<LevelBlock> LevelBlocksEasy = new List<LevelBlock>();
+
+
+    [Header("Medium")]
+    [Space(5)]
+    public int numberBlocksMedium;
+    public List<LevelBlock> LevelBlocksMedium = new List<LevelBlock>();
+
+
+    [Header("Hard")]
+    [Space(5)]
+    public int numberBlocksHard;
+    public List<LevelBlock> LevelBlocksHard = new List<LevelBlock>();
+
+
+    int cycle, countCycle;
+    
     private void Awake()
     {
         if (instance == null)
@@ -30,7 +52,7 @@ public class LevelManager : MonoBehaviour
     }
     void Start()
     {
-        cycle = LevelBlocksEasy.Count - 1 + LevelBlocksMedium.Count - 2 + LevelBlocksHard.Count - 1 - 1;
+        cycle = numberBlocksEasy+numberBlocksMedium+numberBlocksHard-1;
     }
 
     // Update is called once per frame
@@ -77,18 +99,17 @@ public class LevelManager : MonoBehaviour
         currentLevelBlock.Add(block);
         countCycle=0;
         AddLevelBlock();
-
-        
+           
     }
     private LevelBlock GenerateBlocks()
     {
         countCycle = countCycle > cycle ? 0 : countCycle;
 
-        if (countCycle < LevelBlocksEasy.Count - 1)
+        if (countCycle < numberBlocksEasy)
         {
             block = BlocksRandom(Tier.Easy);
         }
-        else if (countCycle < LevelBlocksMedium.Count - 2 + LevelBlocksEasy.Count - 1)
+        else if (countCycle < numberBlocksEasy+numberBlocksMedium)
         {
             block = BlocksRandom(Tier.Medium);
         }
