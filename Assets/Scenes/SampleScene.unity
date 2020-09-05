@@ -3447,6 +3447,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5838854714400498784, guid: 83b3eafd9210e004b8e37a27fc617053,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 23ca2f1fd67e1354bab95bf5a28744d3, type: 2}
     - target: {fileID: 5838854714400498785, guid: 83b3eafd9210e004b8e37a27fc617053,
         type: 3}
       propertyPath: Lastposition
@@ -3456,6 +3461,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5838854714400498787, guid: 83b3eafd9210e004b8e37a27fc617053,
+        type: 3}
+      propertyPath: m_Material
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5838854714400498797, guid: 83b3eafd9210e004b8e37a27fc617053,
         type: 3}
